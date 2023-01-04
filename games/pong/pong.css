@@ -1,0 +1,67 @@
+html{
+    overflow: hidden;
+}
+
+body{
+    margin:0;
+}
+
+content{
+    background-color: gray;
+    display: grid;
+    grid-template-columns: auto 90% auto;
+    grid-template-rows: auto 70% auto;
+    align-items: stretch;
+}
+
+content > div{
+    background-color: gray;
+}
+
+.header{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.blacking{
+    background-color: gray;
+}
+
+.border{
+    border: 3px solid gray;
+    border-radius: 20px;
+}
+
+#main{
+    background-color: black;
+    position: relative;
+}
+
+.player{
+    position: absolute;
+    width: 25px;
+    height: 100px;
+    background: white;
+}
+
+#ball{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    bottom:0;
+    left:0;
+}
+
+#pl1{
+    left: 25px;
+    bottom:0;
+}
+
+#pl2{
+    right: 25px;
+    bottom:0;
+}

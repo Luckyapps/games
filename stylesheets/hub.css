@@ -1,0 +1,35 @@
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+header{
+    text-align: center;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+content{
+    display: flex;
+    justify-content: center;
+}
+
+section{
+
+}
+
+#pong{
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+}
+
+.pong_playnow{
+    display: flex;
+    align-items: center;
+}
+
+.wide{
+    width: 100%;
+}
