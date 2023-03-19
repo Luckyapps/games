@@ -58,13 +58,13 @@ window.addEventListener("keydown",(evt)=>{
     }else if(evt.key == "ArrowLeft"){
         pl_move(pl2, -25)
     }else if(evt.key == "w"){
-        ball_move(0, 25)
+        ball_move(0, 5)
     }else if(evt.key == "a"){
-        ball_move(-25, 0)
+        ball_move(-5, 0)
     }else if(evt.key == "s"){
-        ball_move(0, -25)
+        ball_move(0, -5)
     }else if(evt.key == "d"){
-        ball_move(25, 0)
+        ball_move(5, 0)
     }
 })
 
@@ -113,12 +113,23 @@ function ball_move(x, y){
         ball.elem.style.left = posxl +"px";
         ball.elem.style.bottom = posyb +"px";
     }
+    obj_collision(posxl, posxr, posyb, posyt, pl1.area.A[0], pl1.area.B[0], pl1.area.A[1], pl1.area.C[1])
     pl_area(ball);
 }
 
 function ball_reset(){
     ball.elem.style.left = "0px";
     ball.elem.style.bottom = "0px";
+}
+
+function obj_collision(posxl1, posxr1, posyb1, posyt1, posxl2, posxr2, posyb2, posyt2){
+    var collision = false;
+    console.log("CollY: "+ ((posyt1>=posyb2)&&(posyt1<=posyt2))||((posyb1<=posyt2)&&(posyb1>=posyb2)));
+    if((((posxl1>=posxl2)&&(posxl1<=posxr2))||((posxr1>=posxl2)&&(posxr2<=posxr2)))&&(((posyt1>=posyb2)&&(posyt1<=posyt2))||((posyb1<=posyt2)&&(posyb1>=posyb2)))){
+        collision = true;
+    }
+    console.log(collision);
+    return collision;
 }
 
 function get_style(id, property, type){
@@ -129,3 +140,6 @@ function get_style(id, property, type){
     }
 }
 
+function sleep(ms) { //Sleep funktion, wird ausgelöst mit: await sleep(ms) !!Aufrufende funktion muss asynchron sein!!
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
