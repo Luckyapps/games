@@ -15,9 +15,10 @@ window.addEventListener("keydown",(evt)=>{
 
 async function init_ball(){
     var angle = 45;
-    var speed = 200;
+    var speed = 100;
     var distance = 50000;
-    var params = movementParamters(angle, speed, distance);
+    var stepsize = 1; //Für hohe Geschwindigkeiten, muss sie größer werden, für flüssige bewegungen kleiner
+    var params = movementParamters(angle, speed, distance, stepsize);
     console.log(params);
     for(u=0;u<=params.count;u++){
         move("ball",params.x,params.y);
@@ -30,14 +31,14 @@ async function init_ball(){
                         angle = 360+angle;
                     }
                     angle = 360+180-angle;
-                    params = movementParamters(angle, speed, distance);
+                    params = movementParamters(angle, speed, distance, stepsize);
                     //console.log(angle);
                 }else if(collisionFeedback.direction == "vertical"){
                     if(angle<0){
                         angle = 360+angle;
                     }
                     angle = 270+90-angle;
-                    params = movementParamters(angle, speed, distance);
+                    params = movementParamters(angle, speed, distance, stepsize);
                     //console.log(angle);
                 }
             }
