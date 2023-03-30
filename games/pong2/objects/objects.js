@@ -1,6 +1,6 @@
 var objectlist = {
     player1:{
-        width: 50,
+        width: 10,
         height: 200,
         color: "white",
         pos: {
@@ -9,7 +9,7 @@ var objectlist = {
         }
     },
     player2:{
-        width: 50,
+        width: 10,
         height: 200,
         color: "white",
         pos: {

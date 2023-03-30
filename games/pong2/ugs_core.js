@@ -132,8 +132,16 @@ async function move(elem_id, x, y, type){
     }else{
         await transform_elem(elem_id, x, y); //position ändern
         if(((elem_collision(elem_id)==true)||(border_collision(elem_id)==true))){ //schauen, ob bei neuer Position kollidiert
+            if(border_collision(elem_id)==true){
+                var direction = border_collision(elem_id, true).direction;
+            }else{
+                direction = "horizontal"; //Kann nicht für elem getestet werden
+            }
             transform_elem(elem_id, -x, -y); //position zurückändern, wenn collision besteht
-            return true; //Collision Feedback
+            return {
+                collision: true,
+                direction: direction
+            }; //Collision Feedback
         }
         update_html_elems();//Anzeige anpassen
     }
@@ -151,7 +159,7 @@ function elem_collision(elem_id){ //check, if a elements touches any other
     return false;
 }
 
-function border_collision(elem_id){
+function border_collision(elem_id, returnSide){
     var elem = elements[elem_id];
     if(elem.width>=board_size.x||elem.height>=board_size.y){ //Wenn das elem groößer als das Feld ist, akzepieren
         return false;
@@ -162,6 +170,18 @@ function border_collision(elem_id){
     ){
         return false;//Wenn elem im Feld (kollidiert nicht)
     }else{
+        if(returnSide){
+            var direction;
+            if(((elem.posx>=0)&&(elem.posx+elem.width<=board_size.x))==false){
+                direction = "horizontal";
+            }else if(((elem.posy>=0)&&(elem.posy+elem.height<=board_size.y))==false){
+                direction = "vertical";
+            }
+            return {
+                collision: true,
+                direction: direction
+            }
+        }
         return true;//Wenn elem nicht im Feld (kollidiert)
     }
 }
@@ -183,19 +203,6 @@ function collision_control(elem1_id, elem2_id){ //check, if two elems are touchi
             || ((elem1.posy<elem2.posy)&&(elem1.posy+elem1.height>elem2.posy+elem2.height))//drumrum
         )
     ){collision = true;
-           /* if(
-                (
-                    ((elem1.posx+elem1.width>=elem2.posx)&&(elem1.posx<=elem2.posx)) //links
-                    || ((elem1.posx>=elem2.posx)&&(elem1.posx+elem1.width<=elem2.posx+elem2.width)) //dazwischen
-                    || ((elem1.posx<=elem2.posx+elem2.width)&&(elem1.posx+elem1.width>=elem2.posx+elem2.width)) //rechts
-                    || ((elem1.posx<=elem2.posx)&&(elem1.posx+elem1.width>=elem2.posx+elem2.width))//drumrum
-                )&&(
-                    ((elem1.posy+elem1.height>=elem2.posy)&&(elem1.posy<=elem2.posy)) //unten
-                    || ((elem1.posy>=elem2.posy)&&(elem1.posy+elem1.height<=elem2.posy+elem2.height)) //dazwischen
-                    || ((elem1.posy<=elem2.posy+elem2.height)&&(elem1.posy+elem1.height>=elem2.posy+elem2.height)) //oben
-                    || ((elem1.posy<=elem2.posy)&&(elem1.posy+elem1.height>=elem2.posy+elem2.height))//drumrum
-                )
-                ){}*/
         return {
             collision: true
         };
