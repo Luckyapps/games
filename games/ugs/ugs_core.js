@@ -72,12 +72,12 @@ function init_objects(){ //Definieren von wichtigen Variablen <--> Elemente erst
             //console.log((elem_collision(elem_id)==false&&border_collision(elem_id)==false)!=true);
             if(elem_collision(elem_id)){
                 //console.log("elem_col");
-                elements[elem_id].posx = randomInteger(0,500);
-                elements[elem_id].posy = randomInteger(0,500);
+                elements[elem_id].posx = randomInteger(0,board_size.x);
+                elements[elem_id].posy = randomInteger(0,board_size.y);
             }else if(border_collision(elem_id)){
                 //console.log("border_col");
-                elements[elem_id].posx = randomInteger(0,500);
-                elements[elem_id].posy = randomInteger(0,500);
+                elements[elem_id].posx = randomInteger(0,board_size.x);
+                elements[elem_id].posy = randomInteger(0,board_size.y);
             }
         }
         register_html_elem(elem_id);
@@ -116,7 +116,7 @@ function update_html_elems(){
         htmlelem.style.left = elements[Object.keys(elements)[i]].posx +"px";
         htmlelem.style.width = elements[Object.keys(elements)[i]].width +"px";
         htmlelem.style.height = elements[Object.keys(elements)[i]].height +"px";
-        htmlelem.style.backgroundColor = elements[Object.keys(elements)[i]].color;
+        htmlelem.style.background = elements[Object.keys(elements)[i]].color;
     }
 }
 

@@ -9,11 +9,11 @@ window.addEventListener("keydown",(evt)=>{
     }else if(evt.key=="ArrowDown"){
         move("player2",0,-10);
     }else if(evt.key=="q"){
-        init_ball();
+        move_bounce_elem("ball", 50000, 45, 200, 1);
     }
 });
 
-async function init_ball(){
+/*async function init_ball(){
     var angle = 45;
     var speed = 100;
     var distance = 50000;
@@ -62,4 +62,4 @@ function movementParamters(angle, speed, distance, stepsize,){// distance in px 
         timing: timing*1000,
         count: stepcount
     }
-}
+}*/

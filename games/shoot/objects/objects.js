@@ -9,19 +9,13 @@ var objectlist = {
         width: 100,
         height: 50,
         color: "yellow",
-        pos: {
-            x:60,
-            y:20,
-        }
+        pos: false
     },
     player3:{
         width: 300,
         height: 20,
         color: "orange",
-        pos: {
-            x:60,
-            y:0
-        }
+        pos: false
     },
     player4:{
         width: 20,
