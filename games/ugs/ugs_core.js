@@ -8,12 +8,23 @@ var board_size = {
 }
 
 var main;
+var gui = {
+    container:{},
+    elements:{},
+    change: function(elem, content){
+        this.elements[elem].html.innerHTML = content;
+    }
+}
+var gameData = {}
 
 function screen_resize(){
     document.getElementsByTagName("content")[0].style.height = window.innerHeight +"px";
     document.getElementsByTagName("content")[0].style.width = window.innerWidth +"px";
     board_size.x = document.getElementById("main").clientWidth;
     board_size.y = document.getElementById("main").clientHeight;
+    gui.container = document.getElementById("gui");
+    gui.container.style.width = board_size.x+"px";
+    gui.container.style.height = board_size.y+"px";
     for(k=0;k<Object.keys(elements).length;k++){
         elem_id = Object.keys(elements)[k];
         for(kkkdk=0;(elem_collision(elem_id)==false&&border_collision(elem_id)==false)!=true;kkkdk++){
@@ -54,6 +65,11 @@ function init_objects(){ //Definieren von wichtigen Variablen <--> Elemente erst
     board_size.x = document.getElementById("main").clientWidth;
     board_size.y = document.getElementById("main").clientHeight;
     main = document.getElementById("main");
+    for(i=0;i<gui.container.children.length;i++){
+        gui.elements[gui.container.children[i].id] = {data:undefined,html:undefined};
+        gui.elements[gui.container.children[i].id].html = document.getElementById(gui.container.children[i].id);
+    }
+    console.log(gui);
     for(i=0;i<Object.keys(objectlist).length;i++){
         var elem_id = Object.keys(objectlist)[i]
         var elem = objectlist[elem_id];
@@ -159,10 +175,12 @@ async function move(elem_id, x, y, type){
         if(((elem_collision(elem_id)==true)||(border_collision(elem_id)==true))){ //schauen, ob bei neuer Position kollidiert
             if(border_collision(elem_id)==true){
                 var direction = border_collision(elem_id, true).direction;
+                var colElems = [elem_id, "border"];
             }else if(elem_collision(elem_id)==true){
                 var collisionElem = true;
                 var elem2 = elem_collision(elem_id, true).elem; //Collisionselement
                 transform_elem(elem_id, -x, -y); //position zurückändern, um vorherige Position zu bestimmen
+                var colElems = [elem_id, elem2];
                 //console.log(elem_collision(elem_id, true).elem);
                 var direction = collision_control(elem_id, elem2,true);//Richtung durch Position vor der der Kollision erraten
             }
@@ -171,7 +189,8 @@ async function move(elem_id, x, y, type){
             }
             return {
                 collision: true,
-                direction: direction
+                direction: direction,
+                elements: colElems
             }; //Collision Feedback
         }
         update_html_elems();//Anzeige anpassen
@@ -314,6 +333,10 @@ async function move_bounce_elem(elem, distance, angle, speed, stepsize){ //Um ei
         move(elem,params.x,params.y);
         var collisionFeedback = await move(elem,params.x,params.y);
         //console.log(collisionFeedback);
+        try{
+            collisionListener(collisionFeedback);
+        }
+        catch{}
         try{
             if(collisionFeedback.collision == true){
                 if(collisionFeedback.direction == "horizontal"){

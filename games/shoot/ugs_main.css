@@ -38,9 +38,26 @@ content > div{
 #main{
     background-color: black;
     position: relative;
+    z-index: 100;
+}
+
+#gui{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 800;
+    color: white;
+}
+
+.ugs_elem{
+    position: absolute;
 }
 
 /*-----------------INGAME--------------------*/
-.ugs_elem{
+
+#gui_test{
+    padding:10px;
     position: absolute;
+    left: 50%;
+    transform:translate(-50%,0);
 }

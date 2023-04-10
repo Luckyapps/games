@@ -13,6 +13,35 @@ window.addEventListener("keydown",(evt)=>{
     }
 });
 
+window.addEventListener("load",()=>{
+    gameData.punktetafel = {
+        leftPlayer:0,
+        rightPlayer:0
+    };
+    gameData.lastHit = "player1";
+})
+
+function collisionListener(collisionFeedback){
+    if(collisionFeedback){
+        for(z=0;z<collisionFeedback.elements.length;z++){
+            if(collisionFeedback.elements[z] == "border"){
+                if(collisionFeedback.direction == "horizontal"){
+                    if(gameData.lastHit == "player1"){
+                        gameData.punktetafel.leftPlayer++;
+                    }else{
+                        gameData.punktetafel.rightPlayer++;
+                    }
+                    gui.change("gui_test", gameData.punktetafel.leftPlayer+":"+ gameData.punktetafel.rightPlayer);
+                    console.log(gameData.punktetafel);
+                }
+            }else if(collisionFeedback.elements[z] != "ball"){
+                gameData.lastHit = collisionFeedback.elements[z];
+                console.log(gameData.lastHit);
+            }
+        }
+    }
+}
+
 /*async function init_ball(){
     var angle = 45;
     var speed = 100;

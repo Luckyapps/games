@@ -126,3 +126,45 @@ var objectlist = {
         pos: false
     }
 }
+var objectlist2 = {
+    ball:{
+        width: 25,
+        height: 25,
+        color: "red",
+        pos: false
+    },
+
+    gem1:{
+        width:10,
+        height:10,
+        color:"green",
+        pos: false
+    }
+}
+
+var objectlist3 = {
+    ball:{
+        width: 100,
+        height: 100,
+        color: "red",
+        pos: false
+    },
+    player8:{
+        width:100,
+        height:100,
+        color:"green",
+        pos: false
+    },
+    player9:{
+        width:100,
+        height:100,
+        color:"green",
+        pos: false
+    },
+    player10:{
+        width:100,
+        height:100,
+        color:"green",
+        pos: false
+    }
+}
